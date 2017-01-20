@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 //入力、編集画面に遷移
                 Task task = (Task)parent.getAdapter().getItem(position);
                 Intent intent = new Intent(MainActivity.this,InputActivity.class);
-                intent.putExtra(EXTRA_TASK,task.getId());
+                intent.putExtra(EXTRA_TASK,task);
                 startActivity(intent);
             }
         });
@@ -107,12 +107,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        //task がないときの処理
-//        if(taskRealmResults.size() ==0){
-//            //表示テストタスク作成
-//            addTaskForTest();
-//
-//        }
+        //task がないときの処理
+        if(taskRealmResults.size() ==0){
+            //表示テストタスク作成
+            addTaskForTest();
+
+        }
 
         reloadListView();
     }
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<Task> taskArrayList =new ArrayList<>();
         for (int i=0; i < taskRealmResults.size(); i++){
-//            if(!taskRealmResults.get(i).isValid()) continue;
+            if(!taskRealmResults.get(i).isValid()) continue;
 
             Task task = new Task();
             task.setId(taskRealmResults.get(i).getId());
