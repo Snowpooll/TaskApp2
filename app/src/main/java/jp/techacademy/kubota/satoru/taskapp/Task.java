@@ -16,11 +16,24 @@ public class Task extends RealmObject implements Serializable{
     private String contents;
     private Date date;
 
+    //add category
+    private String category;
+
     @PrimaryKey
     private int id;
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    //category add getter
+    public String getCategory() {
+        return category;
+    }
+
+    //category add setter
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public void setContents(String contents) {

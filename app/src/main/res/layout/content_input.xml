@@ -16,9 +16,16 @@
         android:text="タイトル"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/category"
+        android:layout_below="@+id/title_edit"
+        android:hint="カテゴリ"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
     <EditText
         android:id="@+id/content_edit"
-        android:layout_below="@+id/title_edit"
+        android:layout_below="@+id/category"
         android:hint="内容"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

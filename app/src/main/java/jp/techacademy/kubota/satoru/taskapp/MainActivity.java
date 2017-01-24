@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -42,6 +44,11 @@ public class MainActivity extends AppCompatActivity {
     //list 関連
     private ListView mListView;
     private TaskAdapter mTaskAdapter;
+
+    //検索追加
+    private EditText search_text;
+    private Button search_btn;
+    private Task mTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,6 +137,29 @@ public class MainActivity extends AppCompatActivity {
         }
 
         reloadListView();
+
+        //検索処理
+        search_text =(EditText)findViewById(R.id.search_text);
+        search_btn =(Button)findViewById(R.id.search_btn);
+        search_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String search_word = search_text.getText().toString();
+                mTaskAdapter = new TaskAdapter(MainActivity.this);
+                mListView = (ListView)findViewById(R.id.listView1);
+
+                if(search_word.equals("")){
+                    taskRealmResults = realm.where(Task.class).findAll();
+                    reloadListView();
+                }else{
+                    mTask = new Task();
+                    String category = mTask.getCategory();
+                    taskRealmResults = realm.where(Task.class).equalTo("category",search_text.getText().toString()).findAll();
+                    reloadListView();
+                }
+            }
+        });
+
     }
 
     private void reloadListView(){

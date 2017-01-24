@@ -25,7 +25,7 @@ public class InputActivity extends AppCompatActivity {
 
     private int mYear,mMonth,mDay,mHour,mMinute;
     private Button Datebtn, Timebtn;
-    private EditText titleEdit,contentEdit;
+    private EditText titleEdit,contentEdit,categoryEdit;
     private Task mTask;
 
     private View.OnClickListener mOnDateClickListener = new View.OnClickListener() {
@@ -89,6 +89,8 @@ public class InputActivity extends AppCompatActivity {
         findViewById(R.id.done_btn).setOnClickListener(mOnDoneClickListener);
         titleEdit =(EditText)findViewById(R.id.title_edit);
         contentEdit =(EditText)findViewById(R.id.content_edit);
+        //add category
+        categoryEdit =(EditText)findViewById(R.id.category);
 
         //EXTRA_TASK から id 取得　id から task　インスタンス取得
         Intent intent = getIntent();
@@ -111,6 +113,7 @@ public class InputActivity extends AppCompatActivity {
         else{
             titleEdit.setText(mTask.getTitle());
             contentEdit.setText(mTask.getContents());
+            categoryEdit.setText(mTask.getCategory());
 
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(mTask.getDate());
@@ -146,9 +149,13 @@ public class InputActivity extends AppCompatActivity {
 
         String title = titleEdit.getText().toString();
         String content = contentEdit.getText().toString();
+        //add category
+        String category = categoryEdit.getText().toString();
 
         mTask.setTitle(title);
         mTask.setContents(content);
+        //add category
+        mTask.setCategory(category);
 
         GregorianCalendar calendar = new GregorianCalendar(mYear,mMonth,mDay,mHour,mMinute);
         Date date = calendar.getTime();
